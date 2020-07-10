@@ -456,6 +456,7 @@ function apiGetPlayer(
   const qs: string = req.url!.substring("/api/player?".length);
   let queryParams = querystring.parse(qs);
   const playerId = (queryParams as any)["id"];
+  const userId = (queryParams as any)["userId"];
   const game = playersToGame.get(playerId);
   if (game === undefined || games.get(game.id) === undefined) {
     notFound(req, res);
