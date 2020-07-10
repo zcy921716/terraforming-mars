@@ -49,6 +49,9 @@ function getCorporationCardByName(cardName: string): ICard | undefined {
 }
 
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
+    if(cardName === "MAxwell Base"){
+        cardName = "Maxwell Base";
+    }
     let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();

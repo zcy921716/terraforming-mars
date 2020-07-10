@@ -18,19 +18,19 @@ export class SQLite implements IDatabase {
             fs.mkdirSync(dbFolder);
         }
         this.db = new sqlite3.Database(dbPath);
-        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default 'running', created_time timestamp default (strftime('%s', 'now')), PRIMARY KEY (game_id, save_id))");
+        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running',createtime timestamp default (datetime(CURRENT_TIMESTAMP,'localtime')), PRIMARY KEY (game_id, save_id))");
         this.db.run("CREATE TABLE IF NOT EXISTS 'users'('id'  varchar NOT NULL,'name'  varchar NOT NULL,'password'  varchar NOT NULL,'createtime'  timestamp DEFAULT (datetime(CURRENT_TIMESTAMP,'localtime')),PRIMARY KEY ('id'))");
     }
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
         var allGames:Array<IGameData> = [];
-        var sql = "SELECT distinct game_id game_id, players players FROM games WHERE status = 'running' and save_id = 0 order by game_id asc";
+        var sql = "SELECT distinct game_id game_id, game FROM games WHERE status = 'running' and save_id = 0 order by game_id asc";
   
         this.db.all(sql, [], (err, rows) => {
             if (rows) {
                 rows.forEach((row) => {
                     let gameId:string = row.game_id;
-                    let playerCount: number = row.players;
+                    let playerCount: number = JSON.parse(row.game).players.length;
                     let gameData:IGameData = {
                         gameId,
                         playerCount
@@ -107,6 +107,24 @@ export class SQLite implements IDatabase {
         });        
     }
 
+    cleanGame(game_id: string): void {
+        // DELETE all saves 
+        this.db.run("DELETE FROM games WHERE game_id = ? ", [game_id], function(err: { message: any; }) {
+            if (err) {
+                return console.warn(err.message);  
+            }
+        });
+    }
+    
+    cleanGameSave(game_id: string, save_id: number): void {
+        // DELETE one  save  by save id
+        this.db.run("DELETE FROM games WHERE game_id = ? AND save_id = ?", [game_id, save_id], function(err: { message: any; }) {
+            if (err) {
+                return console.warn(err.message);  
+            }
+        });
+    }
+
     restoreGame(game_id: string, save_id: number, game: Game): void {
         // Retrieve last save from database
         this.db.get("SELECT game game ,createtime createtime  FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [game_id, save_id],(err: { message: any; }, row: { game: any, createtime: any; }) => {
@@ -124,9 +142,9 @@ export class SQLite implements IDatabase {
         });
     }
 
-    saveGameState(game_id: string, save_id: number, game: string, players: number): void {
+    saveGameState(game_id: string, save_id: number, game: string): void {
         // Insert
-        this.db.run("INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)", [game_id, save_id, game, players], function(err: { message: any; }) {
+        this.db.run("INSERT INTO games(game_id, save_id, game) VALUES(?, ?, ?)", [game_id, save_id, game], function(err: { message: any; }) {
             if (err) {
                 //Should be a duplicate, does not matter
                 return;  

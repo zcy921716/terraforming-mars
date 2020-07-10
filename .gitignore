@@ -9,3 +9,4 @@ db/*
 assets/translations.json
 
 /.vscode/launch.json
+/desktop.ini

@@ -92,7 +92,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         }
 
         return new SelectCard(
-            'Select card to add 1 floater',
+            "Select card to add 1 floater",
             floaterCards,
             (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);

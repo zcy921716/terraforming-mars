@@ -33,6 +33,7 @@ import { Database } from "./src/database/Database";
 import { PartyModel, DelegatesModel, TurmoilModel } from "./src/models/TurmoilModel";
 import { SelectDelegate } from "./src/inputs/SelectDelegate";
 import { User } from "./src/User";
+import { IColony } from "./src/colonies/Colony";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
@@ -160,7 +161,7 @@ function processInput(
       const entity = JSON.parse(body);
       player.process(game, entity);
       res.setHeader("Content-Type", "application/json");
-      res.write(getPlayer(player, game));
+      res.write(getPlayer(player, game, false));
       res.end();
     } catch (err) {
       res.writeHead(400, {
@@ -204,7 +205,7 @@ function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void 
     let game = games.get(key)
     if (game !== undefined) {
       answer.push({
-        activePlayer: game.getPlayerById(game.activePlayer).color,
+        activePlayer: game.activePlayer.color,
         id: game.id,
         phase: game.phase,
         players: game.getPlayers().map(player => {
@@ -270,7 +271,7 @@ function apiGetMyGames(req: http.IncomingMessage, res: http.ServerResponse): voi
       let game = games.get(id);
       if (game !== undefined) {
         mygames.push({
-          activePlayer: game.getPlayerById(game.activePlayer).color,
+          activePlayer: game.activePlayer.color,
           id: game.id,
           phase: game.phase,
           players: game.getPlayers().map(player => {
@@ -437,7 +438,7 @@ function apiGetWaitingFor(
   res.setHeader("Content-Type", "application/json");
   const answer = {
     "result": "WAIT",
-    "player": game.getPlayerById(game.activePlayer).name
+    "player": game.activePlayer.name
   }
   if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
     answer["result"] = "GO";
@@ -465,8 +466,13 @@ function apiGetPlayer(
     notFound(req, res);
     return;
   }
+  let block = false;
+  let user = userNameMap.get(player.name);
+  if(user !== undefined && user.id !== userId){
+    block = true;
+  }
   res.setHeader("Content-Type", "application/json");
-  res.write(getPlayer(player, game));
+  res.write(getPlayer(player, game, block));
   res.end();
 }
 
@@ -504,7 +510,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         promoCardsOption: gameReq.promoCardsOption,
         undoOption: gameReq.undoOption,
         heatFor: gameReq.heatFor,
-        enhance: gameReq.enhance,
+        breakthrough: gameReq.breakthrough,
         startingCorporations: gameReq.startingCorporations,
         soloTR: gameReq.soloTR,
         clonedGamedId: gameReq.clonedGamedId,
@@ -644,72 +650,79 @@ function getAwards(game: Game): Array<FundedAwardModel> {
   return awardModels;
 }
 
-function getPlayer(player: Player, game: Game): string {
-  const output = {
-    cardsInHand: getCards(player, player.cardsInHand, game),
-    draftedCards: getCards(player, player.draftedCards, game),
-    milestones: getMilestones(game),
-    awards: getAwards(game),
-    color: player.color,
-    corporationCard: player.corporationCard ?
-      player.corporationCard.name : undefined,
-    corporationCardResources: player.corporationCard ?
-      player.getResourcesOnCard(player.corporationCard) : undefined,
-    energy: player.energy,
-    energyProduction: player.getProduction(Resources.ENERGY),
-    generation: game.getGeneration(),
-    heat: player.heat,
-    heatProduction: player.getProduction(Resources.HEAT),
-    id: player.id,
-    megaCredits: player.megaCredits,
-    megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
-    name: player.name,
-    oceans: game.board.getOceansOnBoard(),
-    oxygenLevel: game.getOxygenLevel(),
-    phase: game.phase,
-    plants: player.plants,
-    plantProduction: player.getProduction(Resources.PLANTS),
-    playedCards: getCards(player, player.playedCards, game),
-    cardsInHandNbr: player.cardsInHand.length,
-    players: getPlayers(game.getPlayers(), game),
-    spaces: getSpaces(game.board.spaces),
-    steel: player.steel,
-    steelProduction: player.getProduction(Resources.STEEL),
-    steelValue: player.steelValue,
-    temperature: game.getTemperature(),
-    terraformRating: player.getTerraformRating(),
-    titanium: player.titanium,
-    titaniumProduction: player.getProduction(Resources.TITANIUM),
-    titaniumValue: player.getTitaniumValue(game),
-    victoryPointsBreakdown: player.getVictoryPoints(game),
-    waitingFor: getWaitingFor(player.getWaitingFor()),
-    gameLog: game.gameLog,
-    isSoloModeWin: game.isSoloModeWin(),
-    gameAge: game.gameAge,
-    isActive: player.id === game.activePlayer,
-    corporateEra: game.corporateEra,
-    venusNextExtension: game.venusNextExtension,
-    venusScaleLevel: game.getVenusScaleLevel(),
-    boardName: game.boardName,
-    colonies: getColonies(game),
-    tags: player.getAllTags(),
-    showOtherPlayersVP: game.showOtherPlayersVP,
-    actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
-    fleetSize: player.fleetSize,
-    tradesThisTurn: player.tradesThisTurn,
-    turmoil: getTurmoil(game),
-    selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game),
-    selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
-    undoing: player.undoing,
-    gameId: game.id,
-    dealtCorporationCards: player.dealtCorporationCards,
-    dealtPreludeCards: player.dealtPreludeCards,
-    initialDraft: game.initialDraft,
-    needsToDraft: player.needsToDraft,
-    deckSize: game.dealer.deck.length,
-    randomMA: game.randomMA
-  } as PlayerModel;
-  return JSON.stringify(output);
+function getPlayer(player: Player, game: Game, block: boolean): string {
+  try{
+    const output = {
+      cardsInHand: block? []: getCards(player, player.cardsInHand, game),
+      draftedCards: getCards(player, player.draftedCards, game),
+      milestones: getMilestones(game),
+      awards: getAwards(game),
+      color: player.color,
+      corporationCard: player.corporationCard ?
+        player.corporationCard.name : undefined,
+      corporationCardResources: player.corporationCard ?
+        player.getResourcesOnCard(player.corporationCard) : undefined,  
+      energy: player.energy,
+      energyProduction: player.getProduction(Resources.ENERGY),
+      generation: game.getGeneration(),
+      heat: player.heat,
+      heatProduction: player.getProduction(Resources.HEAT),
+      id: player.id,
+      megaCredits: player.megaCredits,
+      megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
+      name: player.name,
+      oceans: game.board.getOceansOnBoard(),
+      oxygenLevel: game.getOxygenLevel(),
+      phase: game.phase,
+      plants: player.plants,
+      plantProduction: player.getProduction(Resources.PLANTS),
+      playedCards: getCards(player, player.playedCards, game),
+      cardsInHandNbr: player.cardsInHand.length,
+      players: getPlayers(game.getPlayers(), game),
+      spaces: getSpaces(game.board.spaces),
+      steel: player.steel,
+      steelProduction: player.getProduction(Resources.STEEL),
+      steelValue: player.steelValue,
+      temperature: game.getTemperature(),
+      terraformRating: player.getTerraformRating(),
+      titanium: player.titanium,
+      titaniumProduction: player.getProduction(Resources.TITANIUM),
+      titaniumValue: player.getTitaniumValue(game),
+      victoryPointsBreakdown: player.getVictoryPoints(game),
+      waitingFor: block? undefined: getWaitingFor(player.getWaitingFor()),
+      gameLog: game.gameLog,
+      isSoloModeWin: game.isSoloModeWin(),
+      gameAge: game.gameAge,
+      isActive: player.id === game.activePlayer.id,
+      corporateEra: game.corporateEra,
+      venusNextExtension: game.venusNextExtension,
+      venusScaleLevel: game.getVenusScaleLevel(),
+      boardName: game.boardName,
+      colonies: getColonies(game.colonies),
+      tags: player.getAllTags(),
+      showOtherPlayersVP: game.showOtherPlayersVP,
+      actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
+      fleetSize: player.fleetSize,
+      tradesThisTurn: player.tradesThisTurn,
+      turmoil: getTurmoil(game),
+      selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game),
+      selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+      undoing : player.undoing,
+      gameId : game.id,
+      dealtCorporationCards: player.dealtCorporationCards,
+      dealtPreludeCards: player.dealtPreludeCards,
+      initialDraft: game.initialDraft,
+      deckSize: game.dealer.deck.length,
+      randomMA: game.randomMA,
+      block: block
+    } as PlayerModel;
+    
+    return JSON.stringify(output);
+  }catch(err) {
+    console.warn("error get player", err);
+    return "";
+  }
+
 }
 
 function getCardsAsCardModel(cards: Array<ICard>): Array<CardModel> {
@@ -847,11 +860,11 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.getTitaniumValue(game),
       victoryPointsBreakdown: player.getVictoryPoints(game),
-      isActive: player.id === game.activePlayer,
+      isActive: player.id === game.activePlayer.id,
       venusNextExtension: game.venusNextExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.boardName,
-      colonies: getColonies(game),
+      colonies: getColonies(game.colonies),
       tags: player.getAllTags(),
       showOtherPlayersVP: game.showOtherPlayersVP,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -859,21 +872,19 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       tradesThisTurn: player.tradesThisTurn,
       turmoil: getTurmoil(game),
       selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
-      needsToDraft: player.needsToDraft,
-      deckSize: game.dealer.deck.length,
       waitingFor: getWaitingFor(player.getWaitingFor())
     } as unknown as PlayerModel;
   });
 }
 
-function getColonies(game: Game): Array<ColonyModel> {
-  return game.colonies.map((colony): ColonyModel => ({
-    colonies: colony.colonies.map((playerId): Color => game.getPlayerById(playerId).color),
-    isActive: colony.isActive,
-    name: colony.name,
-    trackPosition: colony.trackPosition,
-    visitor: colony.visitor === undefined ? undefined : game.getPlayerById(colony.visitor).color
-  }));
+function getColonies(colonies: Array<IColony>): Array<ColonyModel> {
+    return colonies.map((colony): ColonyModel => ({
+        colonies: colony.colonies.map((player): Color => player.color),
+        isActive: colony.isActive,
+        name: colony.name,
+        trackPosition: colony.trackPosition,
+        visitor: colony.visitor === undefined ? undefined : colony.visitor.color
+    }));
 }
 
 function getTurmoil(game: Game): TurmoilModel | undefined {
@@ -885,7 +896,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
         chairman = Color.NEUTRAL;
       }
       else {
-        chairman = game.getPlayerById(game.turmoil.chairman).color;
+        chairman = game.turmoil.chairman.color;
       }
     }
     if (game.turmoil.dominantParty) {
@@ -900,7 +911,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     const reserve = game.turmoil.getPresentPlayers().map(player => {
       const number = game.turmoil!.getDelegates(player);
       if (player !== "NEUTRAL") {
-        return { color: game.getPlayerById(player).color, number: number };
+        return {color: player.color, number: number};
       }
       else {
         return { color: Color.NEUTRAL, number: number };
@@ -963,7 +974,7 @@ function getParties(game: Game): Array<PartyModel> | undefined {
       party.getPresentPlayers().forEach(player => {
         const number = party.getDelegates(player);
         if (player !== "NEUTRAL") {
-          delegates.push({ color: game.getPlayerById(player).color, number: number });
+          delegates.push({color: player.color, number: number});
         }
         else {
           delegates.push({ color: Color.NEUTRAL, number: number });
@@ -975,7 +986,7 @@ function getParties(game: Game): Array<PartyModel> | undefined {
           partyLeader = Color.NEUTRAL;
         }
         else {
-          partyLeader = game.getPlayerById(party.partyLeader).color;
+          partyLeader = party.partyLeader.color;
         }
       }
       return {
@@ -1018,7 +1029,7 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
 
 function getGame(game: Game): string {
   const output = {
-    activePlayer: game.getPlayerById(game.activePlayer).color,
+    activePlayer: game.activePlayer.color,
     id: game.id,
     phase: game.phase,
     players: game.getPlayers().map(player => {
@@ -1038,7 +1049,7 @@ function getGame(game: Game): string {
 }
 
 function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
-  if (!process.argv.includes("hide-not-found-warnings")) {
+  if ( ! process.argv.includes("hide-not-found-warnings")) {
     console.warn("Not found", req.method, req.url);
   }
   res.writeHead(404);

@@ -64,7 +64,6 @@ export interface PlayerModel {
     dealtCorporationCards: Array<CorporationCard>;
     dealtPreludeCards:  Array<IProjectCard>;
     initialDraft: boolean;
-    needsToDraft: boolean | undefined;
     undoing :boolean;
     waitingFor :PlayerInputModel;
     deckSize?: number;

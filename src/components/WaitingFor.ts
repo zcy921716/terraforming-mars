@@ -87,6 +87,9 @@ export const WaitingFor = Vue.component("waiting-for", {
             return createElement("div", $t("Undoing, Please refresh or wait seconds"));
         }
         (this as any).waitForUpdate();
+        if(this.player.block){
+            return createElement("div", $t("Please Login with right user"));
+        }
         if (this.waitingfor === undefined) {
             return createElement("div", $t("Not your turn to take any actions"));
         }

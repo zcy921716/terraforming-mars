@@ -35,7 +35,7 @@ describe("SponsoredMohole", function () {
         if (game.turmoil !== undefined) {
             let kelvinists = game.turmoil.getPartyByName(PartyName.KELVINISTS);
             if (kelvinists !== undefined) {
-                kelvinists.delegates.push(player.id, player.id);
+                kelvinists.delegates.push(player, player);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 

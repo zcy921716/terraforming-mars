@@ -8,18 +8,18 @@ export function translateText(englishText: string): string {
     if (lang === "en") return englishText;
 
     englishText = normalizeText(englishText);
-
+    if(!englishText){
+        return "";
+    }
     if ((window as any).TM_translations[lang][englishText]) {
         translatedText = (window as any).TM_translations[lang][englishText]
     } else {
-        let stripedText = englishText.replace(/^\(|\)$/gm, "");
-        if (stripedText !== englishText) {
+        if(englishText.startsWith("(") && englishText.endsWith(")")){
+            let stripedText = englishText.slice(1, englishText.length-1);
             stripedText = translateText(stripedText);
-            if (stripedText !== englishText) {
-                translatedText = "(" + stripedText + ")";
-            }
-        } else if (stripedText && stripedText.length > 3) {
-            // console.log('Please translate "' + stripedText + '"')
+            translatedText = "(" + stripedText + ")";
+        } else if (englishText && englishText.length > 3) {
+            console.log("Please translate \"" + englishText + "\"")
         }
     }
     return translatedText;
@@ -36,7 +36,7 @@ function translateChildren(node: any) {
         if (child.nodeType === Node.TEXT_NODE) {
             var translatedText = translateText(child.data);
             if (translatedText !== child.data) {
-                child.data = translateText(child.data);
+                child.data = translatedText;
             }
         } else {
             translateChildren(child);
