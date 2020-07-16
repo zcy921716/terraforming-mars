@@ -16,7 +16,7 @@ export class _RobinsonIndustries_ implements IActionCard, CorporationCard {
         return undefined;
     }
     public canAct(player: Player): boolean {
-        return player.canAfford(4); 
+        return player.canAfford(2); 
     }
     public action(player: Player) {
         let minimum = player.getProduction(Resources.MEGACREDITS);
