@@ -373,6 +373,26 @@ export enum CardName {
     POSEIDON = "Poseidon",
     STORMCRAFT_INCORPORATED = "Stormcraft Incorporated",
     ARCADIAN_COMMUNITIES = "Arcadian Communities",
+    ASTRODRILL = "Astrodrill",
+    ASTEROID_HOLLOWING = "Asteroid Hollowing",
+    ADVERTISING = "Advertising",
+    PHARMACY_UNION = "Pharmacy Union",
+    COMET_AIMING = "Comet Aiming",
+    CUTTING_EDGE_TECHNOLOGY = "Cutting Edge Technology",
+    CRASH_SITE_CLEANUP = "Crash Site Cleanup",
+    DIRECTED_IMPACTORS = "Directed Impactors",
+    FIELD_CAPPED_CITY = "Field-Capped City",
+    MAGNETIC_SHIELD = "Magnetic Shield",
+    MELTWORKS = "Meltworks",
+    MOHOLE_LAKE = "Mohole Lake",
+    DIVERSITY_SUPPORT = "Diversity Support",
+    JOVIAN_EMBASSY = "Jovian Embassy",
+    TOPSOIL_CONTRACT = "Topsoil Contract",
+    IMPORTED_NUTRIENTS = "Imported Nutrients",
+    ASTEROID_DEFLECTION_SYSTEM = "Asteroid Deflection System",
+    SUB_CRUST_MEASUREMENTS = "Sub-Crust Measurements",
+    POTATOES = "Potatoes",
+    MEAT_INDUSTRY = "Meat Industry",
     INDUSTRIAL_CENTER = "Industrial Center",
     FACTORUM = "Factorum",
     LAKEFRONT_RESORTS = "Lakefront Resorts",
@@ -390,6 +410,9 @@ export enum CardName {
     PENGUINS = "Penguins",
     SMALL_ASTEROID = "Small Asteroid",
     SNOW_ALGAE = "Snow Algae",
+    DEIMOS_DOWN_PROMO = "Deimos Down Promo",
+    MAGNETIC_FIELD_GENERATORS_PROMO = "Magnetic Field Generators Promo",
+    GREAT_DAM_PROMO = "Great Dam Promo",
     DUSK_LASER_MINING = "Dusk Laser Mining",
     MERCURIAN_ALLOYS = "Mercurian Alloys",
     REGO_PLASTICS = "Rego Plastics",
@@ -416,5 +439,28 @@ export enum CardName {
     VOTE_OF_NO_CONFIDENCE = "Vote Of No Confidence",
     LAW_SUIT = "Law Suit",
     STANFORD_TORUS = "Stanford Torus",
-    SATURN_SURFING = "Saturn Surfing"
+    SATURN_SURFING = "Saturn Surfing",
+
+
+///// breakthrough
+
+    _INVENTRIX_ = "Inventrix (breakthrough)",
+    _PHOBOLOG_ = "Pobolog (breakthrough)",
+    _THORGATE_ = "Thorgate (breakthrough)",
+    _ECOLINE_ = "Ecoline (breakthrough)",
+    _TERACTOR_ = "Teractor (breakthrough)",
+    _HELION_ = "Helion (breakthrough)",
+    _APHRODITE_ = "Aphrodite (breakthrough)",
+    _FACTORUM_ = "Factorum (breakthrough)",
+    _MINING_GUILD_ = "Mining guild (breakthrough)",
+    _RECYCLON_ = "Recyclon (breakthrough)",
+    _ROBINSON_INDUSTRIES_ = "Robinson Industries (breakthrough)",
+    _SPLICE_ = "Splice (breakthrough)",
+    _TERRALABS_RESEARCH_ = "Terralabs Research (breakthrough)",
+    _UNITED_NATIONS_MARS_INITIATIVE_ = "UNMI (breakthrough)",
+    _VALLEY_TRUST_ = "Valley Trust (breakthrough)",
+    _VIRON_ = "Viron (breakthrough)"
+
+
+
 }

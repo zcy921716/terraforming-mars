@@ -3,11 +3,10 @@ import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import { Game } from "../../Game";
+import { PartyName } from "../../turmoil/parties/PartyName";
 import { Resources } from "../../Resources";
 import { SelectParty } from "../../interrupts/SelectParty";
-
 
 export class MartianMediaCenter implements IProjectCard {
     public cost: number = 7;
@@ -28,7 +27,7 @@ export class MartianMediaCenter implements IProjectCard {
     }
 
     public canAct(player: Player, game: Game): boolean {
-        return (player.canAfford(3) && game.turmoil!.getDelegates(player.id) > 0);
+        return (player.canAfford(3) && game.turmoil!.getDelegates(player) > 0);
     }
 
     public action(player: Player, game: Game) {

@@ -31,7 +31,7 @@ describe("PublicCelebrations", function () {
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
         if (game.turmoil !== undefined) {
-            game.turmoil.chairman = player.id;
+            game.turmoil.chairman = player;
             expect(card.canPlay(player, game)).to.eq(true); 
         } 
         card.play();

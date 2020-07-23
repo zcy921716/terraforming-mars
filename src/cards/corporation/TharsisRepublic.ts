@@ -1,4 +1,3 @@
-
 import { CorporationCard } from "./CorporationCard";
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
@@ -6,12 +5,12 @@ import { Game } from "../../Game";
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { SpaceType } from "../../SpaceType";
 import { ISpace } from "../../ISpace";
-import { TileType } from "../../TileType";
 import { Resources } from '../../Resources';
 import { CardName } from '../../CardName';
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
+import { Board } from "../../Board";
 
 export class TharsisRepublic implements CorporationCard {
     public name: CardName = CardName.THARSIS_REPUBLIC;
@@ -31,18 +30,17 @@ export class TharsisRepublic implements CorporationCard {
         });
     }
     public onTilePlaced(player: Player, space: ISpace) {
-        if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
+        if (Board.isCitySpace(space)) {
             if (space.player === player) {
                 player.megaCredits += 3;
             }
             if (space.spaceType !== SpaceType.COLONY) {
-                if (player.shouldTriggerCardEffect) player.setProduction(Resources.MEGACREDITS);
-                player.shouldTriggerCardEffect = true; // reset value
+                player.setProduction(Resources.MEGACREDITS);
             }
         }
     }
     public play(player: Player, game: Game) {
-        if (game.getPlayers().length == 1) {
+        if (game.getPlayers().length === 1) {
             // Get bonus for 2 neutral cities
             player.setProduction(Resources.MEGACREDITS,2);
         }

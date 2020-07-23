@@ -14,9 +14,8 @@ export class Recruitment implements IProjectCard {
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
 
-
         if (game.turmoil !== undefined) {
-            if (game.turmoil!.getDelegates(player.id) === 0){
+            if (game.turmoil!.getDelegates(player) === 0){
                 return false;
             }
 
@@ -24,7 +23,7 @@ export class Recruitment implements IProjectCard {
                 if (party.delegates.length > 1) {
                   let delegates = party.delegates.slice();
                   delegates.splice(party.delegates.indexOf(party.partyLeader!),1);
-                  return delegates.indexOf("NEUTRAL") != -1;
+                  return delegates.indexOf("NEUTRAL") !== -1;
                 } else {
                   return false;
                 }

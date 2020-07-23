@@ -6,7 +6,7 @@ import { Unity } from "./parties/Unity";
 import { Kelvinists } from "./parties/Kelvinists";
 import { Reds } from "./parties/Reds";
 import { Greens } from "./parties/Greens";
-import { Player, PlayerId } from "../Player";
+import { Player } from "../Player";
 import { Game } from "../Game";
 import { GlobalEventDealer, getGlobalEventByName } from "./globalEvents/GlobalEventDealer";
 import { IGlobalEvent } from "./globalEvents/IGlobalEvent";
@@ -31,11 +31,11 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
 ];
 
 export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
-    public chairman: undefined | PlayerId | "NEUTRAL" = undefined;
+    public chairman: undefined | Player | "NEUTRAL" = undefined;
     public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;
-    public lobby: Set<PlayerId> = new Set<PlayerId>();
-    public delegate_reserve: Array<PlayerId | "NEUTRAL"> = new Array<PlayerId | "NEUTRAL">();
+    public lobby: Set<string> = new Set<string>();
+    public delegate_reserve: Array<Player | "NEUTRAL"> = new Array<Player | "NEUTRAL">();
     public parties: Array<IParty> = [];
     public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
     public globalEventDealer: GlobalEventDealer;
@@ -52,7 +52,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             this.lobby.add(player.id);
             // Begin with six delegates in the delegate reserve
             for (let i = 0; i < 6; i++) {
-                this.delegate_reserve.push(player.id);   
+                this.delegate_reserve.push(player);   
             }
         });
 
@@ -91,19 +91,19 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     }
 
     // Use to send a delegate to a specific party
-    public sendDelegateToParty(playerId: PlayerId | "NEUTRAL", partyName: PartyName, game: Game, fromLobby: boolean = true): void {
+    public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game, fromLobby: boolean = true): void {
         const party = this.getPartyByName(partyName);
         if (party) {
-            if (playerId != "NEUTRAL" && this.lobby.has(playerId) && fromLobby) {
-                this.lobby.delete(playerId);
+            if (player !== "NEUTRAL" && this.lobby.has(player.id) && fromLobby) {
+                this.lobby.delete(player.id);
             }
             else {
-                const index = this.delegate_reserve.indexOf(playerId);
+                const index = this.delegate_reserve.indexOf(player);
                 if (index > -1) {
                     this.delegate_reserve.splice(index, 1);
                 }
             }
-            party.sendDelegate(playerId, game);
+            party.sendDelegate(player, game);
             this.checkDominantParty(party);
         }
         else {
@@ -112,11 +112,11 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     }
 
     // Use to remove a delegate from a specific party
-    public removeDelegateFromParty(playerId: PlayerId | "NEUTRAL", partyName: PartyName, game: Game): void {
+    public removeDelegateFromParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game): void {
         const party = this.getPartyByName(partyName);
         if (party) {
-            this.delegate_reserve.push(playerId);
-            party.removeDelegate(playerId, game);
+            this.delegate_reserve.push(player);
+            party.removeDelegate(player, game);
             this.checkDominantParty(party);
         }
         else {
@@ -132,7 +132,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
                 (p1, p2) => p2.delegates.length - p1.delegates.length
             );
             const max = sortParties[0].delegates.length;
-            if (this.dominantParty.delegates.length != max) {
+            if (this.dominantParty.delegates.length !== max) {
                 this.setNextPartyAsDominant(this.dominantParty);
             }
         }
@@ -202,13 +202,13 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
 
         // 3.c - Fill the lobby
         this.lobby.forEach(playerId => {
-            this.delegate_reserve.push(playerId);
+            this.delegate_reserve.push(game.getPlayerById(playerId));
         });
         this.lobby = new Set<string>();
 
         game.getPlayers().forEach(player => {
-            if (this.getDelegates(player.id) > 0) { 
-                const index = this.delegate_reserve.indexOf(player.id);
+            if (this.getDelegates(player) > 0) { 
+                const index = this.delegate_reserve.indexOf(player);
                 if (index > -1) {
                     this.delegate_reserve.splice(index, 1);
                 }
@@ -250,13 +250,13 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             
             this.chairman = this.rulingParty.partyLeader;
             if (this.chairman) {
-                if (this.chairman !== "NEUTRAL") {
-                    game.getPlayerById(this.chairman).increaseTerraformRating(game);
+                if (this.chairman instanceof Player) {
+                    this.chairman.increaseTerraformRating(game);
 
                     game.log(
                         LogMessageType.DEFAULT,
                         "${0} is the new chairman and got 1 TR increase",
-                        new LogMessageData(LogMessageDataType.PLAYER, this.chairman));
+                        new LogMessageData(LogMessageDataType.PLAYER, this.chairman.id));
                 }
             }
             else {
@@ -271,15 +271,15 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
 
             // Clean the party
             this.rulingParty.partyLeader = undefined;
-            this.rulingParty.delegates = new Array<PlayerId>();
+            this.rulingParty.delegates = new Array<Player>();
         }
     }
 
     public getPlayerInfluence(player: Player) {
         let influence: number = 0;
-        if (this.chairman !== undefined && this.chairman === player.id) influence++;
-        if (this.dominantParty !== undefined && this.dominantParty.partyLeader === player.id) influence++;
-        if (this.dominantParty !== undefined && this.dominantParty.delegates.indexOf(player.id) !== -1) influence++;
+        if (this.chairman !== undefined && this.chairman === player) influence++;
+        if (this.dominantParty !== undefined && this.dominantParty.partyLeader === player) influence++;
+        if (this.dominantParty !== undefined && this.dominantParty.delegates.indexOf(player) !== -1) influence++;
         if (this.playersInfluenceBonus.has(player.id)) {
             const bonus = this.playersInfluenceBonus.get(player.id);
             if (bonus) {
@@ -307,7 +307,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
         }
         
         let party = this.getPartyByName(partyName);
-        if (party !== undefined && party.getDelegates(player.id) >= 2) {
+        if (party !== undefined && party.getDelegates(player) >= 2) {
             return true;
         }
 
@@ -315,22 +315,22 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     }
 
     // List players present in the reserve
-    public getPresentPlayers(): Array<PlayerId | "NEUTRAL"> {
+    public getPresentPlayers(): Array<Player | "NEUTRAL"> {
         return Array.from(new Set(this.delegate_reserve));
     }
 
     // Return number of delegate
-    public getDelegates(playerId: PlayerId | "NEUTRAL"): number {
-        let delegates = this.delegate_reserve.filter(p => p === playerId).length;
+    public getDelegates(player: Player | "NEUTRAL"): number {
+        let delegates = this.delegate_reserve.filter(p => p === player).length;
         return delegates;
     }
 
     // Get Victory Points
     public getPlayerVictoryPoints(player: Player): number {
         let victory: number = 0;
-        if (this.chairman !== undefined && this.chairman === player.id) victory++;
+        if (this.chairman !== undefined && this.chairman === player) victory++;
         this.parties.forEach(function(party) {
-            if (party.partyLeader === player.id) {
+            if (party.partyLeader === player) {
                 victory++;
             }
         });

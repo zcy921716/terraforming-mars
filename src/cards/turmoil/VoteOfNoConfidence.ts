@@ -13,10 +13,10 @@ export class VoteOfNoConfidence implements IProjectCard {
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            if (game.turmoil!.getDelegates(player.id) === 0){
+            if (game.turmoil!.getDelegates(player) === 0){
                 return false;
             }
-            const parties = game.turmoil.parties.filter(party => party.partyLeader === player.id);
+            const parties = game.turmoil.parties.filter(party => party.partyLeader === player);
             return game.turmoil.chairman === "NEUTRAL" && parties.length > 0;
         }
         return false;
@@ -24,8 +24,8 @@ export class VoteOfNoConfidence implements IProjectCard {
 
     public play(player: Player, game: Game) {
         if (game.turmoil !== undefined) {
-            game.turmoil.chairman! = player.id;
-            const index = game.turmoil.delegate_reserve.indexOf(player.id);
+            game.turmoil.chairman! = player;
+            const index = game.turmoil.delegate_reserve.indexOf(player);
             if (index > -1) {
                 game.turmoil.delegate_reserve.splice(index, 1);
             }

@@ -15,10 +15,10 @@ describe("Productivity", function () {
         const game = new Game("foobar", [player,player2], player);
         const turmoil = new Turmoil(game);
         turmoil.initGlobalEvent(game);
-        turmoil.chairman = player2.id;
+        turmoil.chairman = player2;
         turmoil.dominantParty = new Kelvinists();
-        turmoil.dominantParty.partyLeader = player2.id;
-        turmoil.dominantParty.delegates.push(player2.id);
+        turmoil.dominantParty.partyLeader = player2;
+        turmoil.dominantParty.delegates.push(player2);
         player.setProduction(Resources.STEEL, 3);
         player2.setProduction(Resources.STEEL, 3);       
         card.resolve(game, turmoil);
