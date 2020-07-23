@@ -16,8 +16,8 @@ describe("MolecularPrinting", function () {
         let colony1 = new Luna();
         let colony2 = new Triton();
 
-        colony1.colonies.push(player.id);
-        colony2.colonies.push(player.id);
+        colony1.colonies.push(player);
+        colony2.colonies.push(player);
 
         game.colonies.push(colony1);
         game.colonies.push(colony2);

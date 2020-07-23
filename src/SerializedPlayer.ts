@@ -37,7 +37,6 @@ export interface SerializedPlayer {
     generationPlayed: Map<string, number>;
     actionsTakenThisRound: number;
     terraformRating: number;
-    terraformRatingAtGenerationStart: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
     actionsThisGeneration: Set<string>;
     lastCardPlayed: IProjectCard | undefined;
@@ -51,6 +50,5 @@ export interface SerializedPlayer {
     colonyTradeDiscount: number;
     turmoilScientistsActionUsed: boolean;
     removingPlayers: Array<string>;
-    needsToDraft: boolean | undefined;
 }
 

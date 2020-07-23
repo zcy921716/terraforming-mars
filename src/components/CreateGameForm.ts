@@ -1,10 +1,10 @@
 import Vue from "vue";
 import { Color } from "../Color";
-import { BoardName } from '../BoardName';
+import { BoardName } from "../BoardName";
 import { CardName } from "../CardName";
 import { CorporationsFilter } from "./CorporationsFilter";
 import { $t } from "../directives/i18n";
-import { IGameData } from '../database/IDatabase';
+import { IGameData } from "../database/IDatabase";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -29,10 +29,11 @@ interface CreateGameModel {
     solarPhaseOption: boolean;
     promoCardsOption: boolean;
     undoOption: boolean;
+    heatFor: boolean;
+    breakthrough: boolean;
     startingCorporations: number;
     soloTR: boolean;
     clonedGameData: IGameData | undefined;
-    cloneGameData: Array<IGameData>;
 }
 
 interface NewPlayerModel {
@@ -57,16 +58,16 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 {index: 6, name: "", color: Color.PURPLE, beginner: false, first: false}
             ],
             corporateEra: true,
-            prelude: false,
+            prelude: true,
             draftVariant: true,
             initialDraft: false,
             initialDraftRounds: 4,
             randomMA: false,
             randomFirstPlayer: true,
-            showOtherPlayersVP: false,
-            venusNext: false,
-            colonies: false,
-            turmoil: false,
+            showOtherPlayersVP: true,
+            venusNext: true,
+            colonies: true,
+            turmoil: true,
             customCorporationsList: [],
             showCorporationList: false,
             isSoloModePage: false,
@@ -79,31 +80,24 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             seed: Math.random(),
             seededGame: false,
-            solarPhaseOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
+            solarPhaseOption: true,
+            promoCardsOption: true,
+            undoOption: true,
+            heatFor: false,
+            breakthrough: false,
+            startingCorporations: 4,
             soloTR: false,
             clonedGameData: undefined,
-            cloneGameData: []
         } as CreateGameModel
     },
     components: {
         "corporations-filter": CorporationsFilter,
     },
     mounted: function () {
-        if (window.location.pathname === '/solo') {
+        if (window.location.pathname === "/solo") {
             this.isSoloModePage = true;
         }
 
-        const onSucces = (response: any) => {
-            this.$data.cloneGameData = response;
-        }
-
-        fetch("/api/clonablegames")
-        .then(response => response.json())
-        .then(onSucces)
-        .catch(_ => alert("Unexpected server response"));        
     },
     watch: {
         playersCount: function (val) {
@@ -154,7 +148,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
             component.players.forEach((player) => {
                 if (player.name === "") {
                     if (isSoloMode) {
-                        player.name = "You";
+                        const userName = localStorage.getItem("userName") || "";
+                        if( userName.length > 0){
+                            player.name = userName;
+                        }else{
+                            player.name = "You";
+                        }
                     } else {
                         const defaultPlayerName = player.color.charAt(0).toUpperCase() + player.color.slice(1);
                         player.name = defaultPlayerName;
@@ -171,7 +170,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 const boards = Object.values(BoardName);
                 this.board = boards[Math.floor(Math.random() * boards.length)];
             }
-            
+
             const corporateEra = component.corporateEra;
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;
@@ -188,20 +187,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
             const undoOption = component.undoOption;
+            const heatFor = component.heatFor;
+            const breakthrough = component.breakthrough;
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
             let clonedGamedId: undefined | string = undefined;
-
-            // Clone game checks
-            if (component.clonedGameData !== undefined) {
-                clonedGamedId = component.clonedGameData.gameId;
-                if (component.clonedGameData.playerCount !== players.length) {
-                    alert("Player count mismatch ");
-                    this.$data.playersCount = component.clonedGameData.playerCount;
-                    return;
-                }
-            }
-
             const dataToSend = JSON.stringify({
                 players: players,
                 corporateEra,
@@ -217,6 +207,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 solarPhaseOption,
                 promoCardsOption,
                 undoOption,
+                heatFor, 
+                breakthrough,
                 startingCorporations,
                 soloTR,
                 clonedGamedId,
@@ -283,10 +275,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                         <div class="create-game-options-block col3 col-sm-6">
                             <h4 v-i18n>Extensions</h4>
-                            <label class="form-switch">
-                                <input type="checkbox" name="corporateEra" v-model="corporateEra">
-                                <i class="form-icon"></i> <span v-i18n>Corporate Era</span>
-                            </label>
 
                             <label class="form-switch">
                                 <input type="checkbox" name="prelude" v-model="prelude">
@@ -344,11 +332,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
 
                             <label class="form-switch" v-if="playersCount > 1">
-                                <input type="checkbox" name="randomMA" v-model="randomMA">
-                                <i class="form-icon"></i> <span v-i18n>Random Milestones/Awards</span>
-                            </label>
-
-                            <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
                                 <i class="form-icon"></i> <span v-i18n>Show real-time VP</span>
                             </label>
@@ -368,22 +351,21 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <i class="form-icon"></i> <span v-i18n>Allow undo</span>
                             </label>
 
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="heatFor">
+                                <i class="form-icon"></i> <span v-i18n>7 Heat Into Temperature</span>
+                            </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="breakthrough">
+                                <i class="form-icon"></i> <span v-i18n>BreakThrough</span>
+                            </label>
+
                             <label class="form-label">
                                 <input type="number" class="form-input form-inline create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" />
                                 <i class="form-icon"></i> <span v-i18n>Starting Corporations</span>
                             </label>
 
-                            <label class="form-switch">
-                                <input type="checkbox" v-model="seededGame">
-                                <i class="form-icon"></i> <span v-i18n>Set Predefined Game</span>
-                            </label>
-                            <div v-if="seededGame">
-                                <select name="clonedGamedId" v-model="clonedGameData">
-                                    <option v-for="game in cloneGameData" :value="game" :key="game.gameId">
-                                        {{ game.gameId }} - {{ game.playerCount }} player(s)
-                                    </option>
-                                </select>
-                            </div>
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">

@@ -13,11 +13,11 @@ import { WaterImportFromEuropa } from "../src/cards/WaterImportFromEuropa";
 import { Phase } from "../src/Phase";
 import { maxOutOceans } from "./TestingUtils";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
-import { Resources } from '../src/Resources';
+import { Resources } from "../src/Resources";
 import { ISpace } from "../src/ISpace";
-import { ResearchNetwork } from '../src/cards/prelude/ResearchNetwork';
+import { ResearchNetwork } from "../src/cards/prelude/ResearchNetwork";
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
-import { Ecologist } from '../src/milestones/Ecologist';
+import { Ecologist } from "../src/milestones/Ecologist";
 import { Dealer } from "../src/Dealer";
 import { BoardName } from "../src/BoardName";
 import { OrOptions } from "../src/inputs/OrOptions";
@@ -34,11 +34,11 @@ describe("Game", function () {
     it("correctly separates 71 corporate era cards", function() {
         // include corporate era
         const dealer = new Dealer(true, false, false, false, false, false);
-        expect(dealer.getDeckSize()).to.eq(208);
+        expect(dealer.deck.length).to.eq(208);
 
         // exclude corporate era
         const dealer2 = new Dealer(false, false, false, false, false, false);
-        expect(dealer2.getDeckSize()).to.eq(137);
+        expect(dealer2.deck.length).to.eq(137);
     });
 
     it("sets starting production if corporate era not selected", function() {

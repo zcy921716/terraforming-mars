@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { RedTourismWave } from "../../../src/cards/turmoil/RedTourismWave";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { BoardName } from '../../../src/BoardName';
-import { GameOptions, Game } from '../../../src/Game';
+import { BoardName } from "../../../src/BoardName";
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Resources } from "../../../src/Resources";
 import { SpaceName } from "../../../src/SpaceName";
@@ -37,7 +37,7 @@ describe("RedTourismWave", function () {
         if (game.turmoil !== undefined) {
             let reds = game.turmoil.getPartyByName(PartyName.REDS);
             if (reds !== undefined) {
-                reds.delegates.push(player.id, player.id);
+                reds.delegates.push(player, player);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 
@@ -45,6 +45,6 @@ describe("RedTourismWave", function () {
         const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
         game.addCityTile(player, lands[0].id);
         card.play(player, game);
-        expect(player.getResource(Resources.MEGACREDITS)).to.eq(2);
+        expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
     });
 });

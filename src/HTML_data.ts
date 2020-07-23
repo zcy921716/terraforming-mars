@@ -4219,7 +4219,8 @@ export const HTML_DATA: Map<string, string> =
                 <div class="red-arrow "></div> <div class="microbe resource "></div><br>
                 <div class="resource-tag tag-plant"></div>  : <div class="microbe resource "></div> = <div class="money resource ">2</div>
                   <div class="description">
-                  (Action: Add 1 microbe to this card.)
+                  (Action: Add 1 Microbe to this card.)
+                  <br>
                   (Effect: When paying for a plant card, microbes here may be used as 2 MC each.)
                   <br><br>
                   (Temperature must be -20 C or lower.)
@@ -5478,8 +5479,8 @@ export const HTML_DATA: Map<string, string> =
           <div class="description" style="text-align:center;margin-top:0px;">
             (Action: Add a floater to ANY card.) <br>
           </div>
-          <div class="description" style="margin-top:17px;margin-left:17px; width: 120px; text-align:left;">
-          (1 VP per 3 floaters <br> on this card.)
+          <div class="description" style="margin-top:17px;margin-left:17px; width: 115px; text-align:left;">
+          (1 VP per 3 floaters on this card.)
           </div>
         </div>
         <div class="celestic" style="font-size:24px;box-shadow:6px 6px 6px grey;margin-left: 9px;margin-bottom:2px">
@@ -5632,7 +5633,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="description " style="text-align:center;margin-top:0px ">
             <div class="production-box" style="margin-left:-30px;margin-top:-5px;margin-bottom:-5px;"><div class="production titanium"></div></div>
             <div class="resource money" style="margin-left:60px;margin-bottom:15px">38</div><br>
-              (You start with 1 titanium production<br> and 38 MC.)
+              (You start with 1 titanium production and 38 MC.)
             </div>
 `],
 [CardName.ROBINSON_INDUSTRIES,`
@@ -5640,7 +5641,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="prelude-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
-          <div class="corporationEffectBoxLabel">EFFECT</div>
+          <div class="corporationEffectBoxLabel">ACTION</div>
           <div class="resource money">4</div>
           <div class="red-arrow"></div>
           <div class="production-box">
@@ -5741,7 +5742,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production money">1</div>
           </div>
           <div class="description" style="text-align:center;margin-top:0px;">
-            (When you get a new type of tag in play (event cards do not count), increase your MC production 1 step.)
+            (Effect: When you get a new type of tag in play (event cards do not count), increase your MC production 1 step.)
           </div>
         </div>
         <div class="aridor">ARIDOR</div>
@@ -6048,7 +6049,7 @@ export const HTML_DATA: Map<string, string> =
                     <div STYLE="font-size:10px">TACTICAL GENOMICS</div>
                 </div>
                 <div class="resource money" style="margin-left:60px;margin-right:25px;">44</div>
-                <div class="resource card" style="margin-left:20px;"><div class="card-icon card-icon-microbe">&#x2042;</div></div>
+                <div class="resource card" style="margin-left:20px;margin-bottom: 0px;top: -10px;margin-top: -4px;"><div class="card-icon card-icon-microbe">&#x2042;</div></div>
         <div class="description" style="margin-top:-2px;margin-left:-7px;margin-right:-7px;text-align:center;">(You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take that card into hand and discard the rest.)</div>
       </div>
 `],
@@ -6093,7 +6094,7 @@ export const HTML_DATA: Map<string, string> =
       <div style="font-size:16px;margin-top:33px;margin-left:75px;margin-bottom:5px; font-family:Prototype;color:#222;transform:scale(2,1)">
         TERRALABS
         </div>
-        <div style="font-size:8px;letter-spacing:2px;font-family:Prototype;margin-left:100px;margin-top:-5px;margin-bottom:10px;transform:scale(2,1)">RESEARCH</div>
+        <div style="font-size:8px;letter-spacing:2px;font-family:Prototype;margin-left:100px;margin-top:-5px;transform:scale(2,1)">RESEARCH</div>
       <div class="resource money " style="margin-left:25px;margin-right:20px;">14</div> - <div class="tile rating"></div>
       <div class="description " style="text-align:center;">
           (You start with 14 MC. Lower your TR 1 step.)
@@ -6146,6 +6147,28 @@ export const HTML_DATA: Map<string, string> =
         <div class="resource money" style="margin-left:60px;margin-top:10px">36</div>
         <div class="description" style="text-align:center;margin-top:10px">
           (You start with 36 MC. When you perform an action, the wild tag counts as any tag of your choice.)
+        </div>
+      </div>
+`],
+[CardName.ASTRODRILL,`
+      <div class="tag tag1 tag-space"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      ##RESOURCES##
+      <div class="promo-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox" style="height:160px;margin-top:130px">
+          <div class="corporationEffectBoxLabel" >ACTION</div>
+          <div class="red-arrow"></div> <div class="asteroid resource">A</div> * / <div class="resource " style="background:white;">?</div> OR <br>
+          <div class="asteroid resource">A</div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
+          <div class="description" style="text-align:center;">
+            (Action: Add an asteroid resource to ANY card and gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)<br>
+          </div>
+        </div>
+        <div class="astrodrill">Astrodrill</div>
+        <div class="resource money" style="margin:3px 40px 0px 50px">38</div>
+        3 <div class="asteroid resource">A</div>
+        <div class="description" style="text-align:center">
+          (You start with 38 MC and 3 asteroid resources.)
         </div>
       </div>
 `],
@@ -6742,6 +6765,391 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+[CardName.ASTEROID_HOLLOWING, `
+    <div class="title background-color-active">Asteroid Hollowing</div>
+    <div class="price ">16</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-space "></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content ">
+        <div class="points" style="line-height:45px;vertical-align:middle">1/2<div class="asteroid resource" style="vertical-align:middle;margin-left:5px">A</div></div>
+        <div class="resource titanium"></div>
+        <span class="red-arrow"></span>
+        <div class="asteroid resource" style="margin-right:5px">A</div>
+        <div class="production-box"><div  class="production money">1</div></div>
+        <div class="description">
+            (Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.)
+            <br><br>(1 VP per 2 asteroid resources on this card.)
+        </div>
+      </div>
+    </div>
+`],
+[CardName.ADVERTISING,`
+      <div class="title background-color-active">Advertising</div>
+      <div class="price ">4</div>
+      <div class="tag tag1 tag-earth"></div>
+      <div class="promo-icon project-icon"></div>
+      <div class="content ">
+        <div class="resource money">20</div>* : <div class="production-box"><div class="production money">1</div></div></div>
+        <div class="description" style="text-align:center;margin:0px 10px;">
+          (Effect: When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step.)
+        </div>
+      </div>
+`],
+[CardName.PHARMACY_UNION,`
+    <div class="tag tag1 tag-microbe"></div>
+    <div class="tag tag2 tag-microbe"></div>
+    <div class="corporationLabel">Corporation</div>
+    ##RESOURCES##
+    <div class="venus-icon corporation-icon"></div>
+    <div class="contentCorporation">
+
+      <div class="corp-logo">Pharmacy Union</div>
+
+      <div class="card-effect-icons">
+        <div class="resource money startmc">54</div>
+        <div class="resource card">
+          <div class="card-icon card-icon-science"></div>
+        </div>
+      </div>
+
+      <div class="description card-effect-text">
+        (You start with 54 MC. As your first action, draw a Science card.)
+      </div>
+
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel">Effect</div>
+        <div class="resource-tag tag-microbe red-outline"></div> : <div class="resource disease">D</div><div class="resource money">-4</div>
+        <div class="corp-effectrow2">
+          <div class="resource-tag tag-science"></div> : - <div class="resource disease">D</div><div class="rating tile"></div> / 3 <div class="rating tile"></div>
+        </div>
+        <div class="description">
+          (Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR)
+        </div>
+      </div>
+    </div>
+
+`],
+[CardName.COMET_AIMING, `
+    <div class="title background-color-active">Comet Aiming</div>
+    <div class="price ">17</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-space "></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content ">
+        <div class="resource titanium"></div>
+        <span class="red-arrow"></span>
+        <div class="asteroid resource">A</div>*
+        <br>
+        OR <div class="asteroid resource">A</div>
+        <span class="red-arrow"></span>
+        <div class="tile ocean-tile"></div>
+        <div class="description">
+            (Action: Spend 1 titanium to add 1 asteroid resource to ANY card, or remove 1 asteroid resource here to place an ocean tile.)
+        </div>
+      </div>
+    </div>
+`],
+[CardName.CUTTING_EDGE_TECHNOLOGY,`
+            <div class="title background-color-active">Cutting Edge Technology</div>
+            <div class="price">11</div>
+            <div class="tag tag1 tag-science"></div>
+            <div class="promo-icon project-icon"></div>
+            <div class="content">
+                <div class="points points-big">1</div>
+                <div class="resource card">
+                <div class="card-icon requirements"></div></div>
+                 : <div class="money resource">-2</div>
+                <div class="description">
+                    (Effect: When playing a card with a requirement, you pay 2 MC less for it.)
+                </div>
+            </div>
+`],
+[CardName.CRASH_SITE_CLEANUP, `
+    <div class="title background-color-events">Crash Site Cleanup</div>
+    <div class="price">4</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        <div class="requirements">- <div class="resource plant red-outline"></div></div>
+        <div class="resource titanium"></div> OR 2 <div class="resource steel"></div>
+        <div class="description">
+            (Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.)
+        </div>
+    </div>
+`],
+[CardName.DIRECTED_IMPACTORS, `
+    <div class="title background-color-active">Directed Impactors</div>
+    <div class="price">8</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class=" money resource">6</div> (<span class="titanium"></span>)
+        <span class="red-arrow"></span>
+        <div class="asteroid resource">A</div>*
+        <br>
+        OR <div class="asteroid resource">A</div>
+        <span class="red-arrow"></span>
+        <div class="tile temperature-tile"></div>
+        <div class="description">
+            (Action: Spend 6 MC to add 1 asteroid resource to ANY card (titanium may be used), or remove 1 asteroid resource here to raise temperature 1 step.)
+        </div>
+      </div>
+    </div>
+`],
+[CardName.FIELD_CAPPED_CITY,`
+        <div class="title background-color-automated">Field-Capped City</div>
+        <div class="price">29</div>
+        <div class="tag tag1 tag-building"></div>
+        <div class="tag tag2 tag-city"></div>
+        <div class="tag tag3 tag-power"></div>
+        <div class="promo-icon project-icon"></div>
+        <div class="content">
+            <div class="production-box production-box-size1a">
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div>
+            </div>
+            <div class="tile city-tile"></div><br>
+            <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
+            <div class="description">
+                <div>(Increase your MC production 2 steps and increase your Energy production 1 step. Gain 3 plants, and place a City tile.)</div>
+            </div>
+        </div>
+`],
+[CardName.MAGNETIC_SHIELD,`
+    <div class="title background-color-automated">Magnetic Shield</div>
+    <div class="price">26</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class="requirements">2 Power</div>
+        4 <div class="tile rating"></div>
+        <div class="description">
+            (Requires 2 Power tags. Raise your TR 4 steps.)
+        </div>
+    </div>
+`],
+[CardName.MELTWORKS,`
+    <div class="title background-color-active">Meltworks</div>
+    <div class="price">4</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content ">
+      5 <span class="heat resource"></span> <span class="red-arrow "></span>
+      <div class="steel resource"></div><div class="steel resource"></div><div class="steel resource"></div>
+      <div class="description ">
+        (Action: Spend 5 heat to gain 3 steel.)
+      </div>
+    </div>
+`],
+[CardName.MOHOLE_LAKE,`
+    <div class="title background-color-active">Mohole Lake</div>
+    <div class="price">31</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class="red-arrow"></div><div class="microbe resource"></div>* OR <div class="animal resource"></div>*
+        <div class="description">
+          (Action: Add a microbe or animal to ANOTHER card.)
+        </div>
+        <br>
+        <div class="tile temperature-tile"></div><div class="tile ocean-tile"></div>
+        <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
+        <div class="description">
+          (Place an ocean tile and raise temperature 1 step. Gain 3 Plants.)
+        </div>
+    </div>
+`],
+[CardName.DIVERSITY_SUPPORT,`
+        <div class="title background-color-events">Diversity Support</div>
+        <div class="price">1</div>
+        <div class="tag tag1 tag-event"></div>
+        <div class="promo-icon project-icon"></div>
+        <div class="content">
+            <div class="requirements">9 Resources</div>
+            <div class="tile rating"></div>
+            <div class="description ">
+                (Requires that you have 9 different types of resources. Raise your terraform rating 1 step.)
+            </div>
+        </div>
+`],
+[CardName.TOPSOIL_CONTRACT, `
+    <div class="title background-color-active">Topsoil Contract</div>
+    <div class="price">8</div>
+    <div class="tag tag1 tag-microbe"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="microbe resource"></div>* : <div class="money resource">1</div>
+      <div class="description">
+        (Effect: When you gain a microbe to ANY CARD, gain 1 MC.)
+      </div>
+      <br><br>
+      <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
+      <div class="description">
+        (Gain 3 plants.)
+      </div>
+    </div>
+`],
+[CardName.IMPORTED_NUTRIENTS,`
+    <div class="title background-color-events">Imported Nutrients</div>
+    <div class="price">14</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="tag tag3 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      4 <div class="plant resource"></div> 4 <div class="microbe resource"></div>*
+      <div class="description">
+        (Gain 4 Plants and add 4 Microbes to ANOTHER card.)
+      </div>
+    </div>
+`],
+[CardName.ASTEROID_DEFLECTION_SYSTEM,`
+    <div class="title background-color-active">Asteroid Deflection System</div>
+    <div class="price">13</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="tag tag3 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="points">1/<div class="asteroid resource">A</div></div>
+      <span class="red-arrow"></span><div class="resource card"></div>*
+      <div class="resource-tag tag-space"></div> : <div class="asteroid resource">A</div>
+      <div class="description">
+        (Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid resource here.)
+      </div>
+      <br>
+      <div class="description effect">
+        OPPONENTS MAY NOT REMOVE YOUR PLANTS
+      </div>
+      <br>
+      <div class="production-box production-box-size1a">
+        <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div><br>
+      </div>
+      <div class="description bottom" >
+        (Decrease your energy<br>
+        production 1 step. 1 VP per<br>
+        asteroid on this card.)
+      </div>
+    </div>
+`],
+[CardName.JOVIAN_EMBASSY,`
+<div class="title background-color-automated">Jovian Embassy</div>
+<div class="price">14</div>
+<div class="tag tag1 tag-building"></div>
+<div class="tag tag2 tag-jovian"></div>
+<div class="promo-icon project-icon"></div>
+<div class="content">
+    <div class="points points-big">1</div>
+    <div class="tile rating"></div>
+    <div class="description ">
+        (Raise your terraform rating 1 step.)
+    </div>
+</div>
+`],
+[CardName.SUB_CRUST_MEASUREMENTS,`
+    <div class="title background-color-active">Sub-Crust Measurements</div>
+    <div class="price">20</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-science"></div>
+    <div class="tag tag3 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="points points-big">2</div>
+      <div class="requirements">2 Science</div>
+      <span class="red-arrow"></span> <span class="card resource"></span>
+      <div class="description">
+        (Action: Draw a card.)
+      </div>
+      <br>
+      <div class="description">
+        (Requires 2 Science tags.)
+      </div>
+    </div>
+`],
+[CardName.POTATOES,`
+      <div class="title background-color-automated">Potatoes</div>
+      <div class="price">2</div>
+      <div class="tag tag1 tag-plant"></div>
+      <div class="promo-icon project-icon"></div>
+      <div class="content">
+        -  <div class="plant resource"></div><div class="plant resource"></div>
+        &nbsp;&nbsp;
+        <div class="production-box">
+          <div class="money production">2</div>
+        </div>
+        <div class="description">
+          (Requires that you lose 2 plants. Increase your MC production 2 steps.)
+        </div>
+      </div>
+`],
+[CardName.MEAT_INDUSTRY, `
+    <div class="title background-color-active">Meat Industry</div>
+    <div class="price">5</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="animal resource"></div>* : <div class="money resource">2</div>
+      <div class="description">
+        (Effect: When you gain an animal to ANY CARD, gain 2 MC.)
+      </div>
+    </div>
+`],
+[CardName.DEIMOS_DOWN_PROMO,`
+    <div class="title background-color-events">Deimos Down</div>
+    <div class="price">31</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="tile temperature-tile"></div>
+      <div class="tile temperature-tile"></div>
+      <div class="tile temperature-tile"></div><br>
+      <div class="tile special-tile">&#x274B;</div>*&nbsp;
+      4 <div class=" steel resource"></div>&nbsp;
+      -6 <div class="resource plant red-outline"></div>
+      <div class="description">
+        (Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.)
+      </div>
+    </div>
+`],
+[CardName.GREAT_DAM_PROMO,`
+      <div class="title background-color-automated">Great Dam</div>
+      <div class="price">15</div>
+      <div class="tag tag1 tag-building"></div>
+      <div class="tag tag2 tag-power"></div>
+      <div class="promo-icon project-icon"></div>
+      <div class="content">
+        <div class="points points-big">1</div>
+        <div class="requirements">4 Oceans</div>
+        <div class="production-box production-box-size2">
+          <div class="energy production"></div><div class="energy production"></div>
+        </div>
+        *&nbsp;<div class="tile special-tile">&#x23DA;</div>
+        <div class="description">
+          (Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.)
+        </div>
+      </div>
+`],
+[CardName.MAGNETIC_FIELD_GENERATORS_PROMO,`
+        <div class="title background-color-automated">Magnetic Field Generators</div>
+        <div class="price">22</div>
+        <div class="tag tag1 tag-building"></div>
+        <div class="promo-icon project-icon"></div>
+        <div class="content">
+          <div class="production-box production-box-size2a">
+            <div class="production-prefix">&#x2796;&#xFE0E;</div> 4 <div class="energy production"></div><br>
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="plant production"></div><div class="plant production"></div>
+          </div> <br>
+           3 <div class="tile rating"></div>*&nbsp;&nbsp;<div class="tile special-tile"><span class="tile-icon">&#x25C9;</span></div>
+          <div class="description">
+            (Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.)
+          </div>
+        </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>
@@ -7159,5 +7567,477 @@ export const HTML_DATA: Map<string, string> =
             (Add 1 floater here for every Earth tag you have, including this.)
         </div>
     </div>
-`]
+`],
+
+
+
+
+
+
+///// breakthrough
+[CardName._INVENTRIX_,`
+    <div class="tag tag1 tag-science"></div>
+    <div class="tag tag2 tag-science"></div>
+      <div class="corporationLabel ">CORPORATION</div>
+      <div class="contentCorporation ">
+          <div class="corporationEffectBox ">
+              <div class="corporationEffectBoxLabel ">EFFECT</div>
+                <div class="tile background-color-corporation" style="width:100px;text-shadow:none;color:black;font-size:11px;padding-top:5px;padding-bottom:5px;">Temp / O2 / Ocean</div>: +/- 3
+              <div class="description " style="text-align:center;margin-top:0px; ">
+                  (Effect: Your temperature, oxygen and ocean requirements are +3 or -3 steps, your choice in each case.)
+              </div>
+          </div>
+          <span style="color: #020202;
+          font-size:24px;
+          margin-top:33px;margin-left:75px;margin-bottom:5px;
+          padding-left:5px;
+          padding-bottom:5px;
+          text-shadow: 6px 6px 5px grey;
+          ;">
+            <span style="color: #020202;background-color:#6bb5c7;margin-top:33px;padding-left:4px;padding-right:4px;font-size:26px;box-shadow: 6px 6px 10px grey;">X</span> INVENTRIX
+          </span>
+          <div class="description " style="text-align:center ">
+            <div class="resource money " style="margin-left:20px;">45</div> <div class="resource card" style="margin-left:20px"></div><div class="resource card"></div><div class="resource card"></div><br>
+              (As you first action in the game, draw 3 cards. Start with 45MC.)
+          </div>
+      </div>
+`],
+[CardName._PHOBOLOG_,`
+    <div class="tag tag1 tag-space"></div>
+    <div class="corporationLabel">CORPORATION</div>
+    <div class="contentCorporation">
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel">EFFECT</div>
+        <div class="resource titanium"></div> : +
+        <div class="resource money">1</div>
+
+        <div class="description" style="text-align:center;margin-top:0px;">
+          (Effect: Your titanium resources are each worth 1 MC extra.)
+        </div>
+      </div>
+      <span style="font-size:24px;
+                      margin-left:15px;
+                      color:white;
+                      line-height:40px;
+                      background: #32004d;
+                      padding-left:5px;
+                      padding-right:5px;
+                      border:1px solid #444;
+                      border-radius:10px;
+                      font-family: 'Times New Roman';
+                      display:inline-block;
+                      -webkit-transform:scale(1.2,1); /* Safari and Chrome */
+                      -moz-transform:scale(1.2,1); /* Firefox */
+                      -ms-transform:scale(1.2,1); /* IE 9 */
+                      -o-transform:scale(1.2,1); /* Opera */
+                      transform:scale(1.2,1); /* W3C */
+                      box-shadow:  6px 6px 5px  grey;">
+                  PHOBOLOG
+              </span><br><br>
+              
+      <div class="resource money" style="margin-left:10px;">23</div>
+      10<div class="resource titanium"></div>
+      <div class="resource card"><div class="card-icon card-icon-space">&#x2734;</div></div> 
+      <div class="resource card"><div class="card-icon card-icon-space">&#x2734;</div></div>
+      
+      <div class="description" style="text-align:center;">
+        (You start with 10 titanium and 23 MC.As your first action, draw 2 space cards. )
+      </div>
+    </div>
+`],
+[CardName._THORGATE_,`
+    <div class="tag tag1 tag-power"></div>
+    <div class="tag tag2 tag-science"></div>
+    <div class="corporationLabel">CORPORATION</div>
+    <div class="contentCorporation">
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel">EFFECT</div>
+        <div class="resource-tag tag-power"></div> * :
+        <div class="resource money">-3</div>
+        <div class="description" style="text-align:center;margin-top:0px;">
+          (Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.)
+        </div>
+      </div>
+      <span style="color: #020202;
+                      font-size:32px;
+                      font-family: 'Arial Narrow','Verdana';
+                      font-weight:normal;
+                      text-shadow: 6px 3px 5px  grey;">
+                  THORGATE
+              </span><br><br>
+      <div class="production-box production-box-size2" style="margin-left:45px;margin-top:-10px;">
+        <div class="production energy"></div><div class="production energy"></div>
+      </div>
+      <div class="resource money" style="margin-left:20px;">44</div>
+      <div class="description" style="text-align:center;">
+        (You start with 2 energy production and 44 MC.)
+      </div>
+    </div>
+`],
+[CardName._HELION_,`
+    <div class="tag tag1 tag-space"></div>
+    <div class="corporationLabel">CORPORATION</div>
+    <div class="contentCorporation">
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel">EFFECT</div>
+        X<div class="resource heat"></div> :
+        <div class="resource money">X</div>
+        <div class="description" style="text-align:center;margin-top:0px;">
+          (Effect: Your may use heat as MC. You may not use MC as heat.)
+        </div>
+      </div>
+      <div style="font-size:34px;
+                      width:140px;
+                      text-align: center;
+                      color: #020202;
+                      margin-top:5px;
+                      border:2px solid black;
+                      margin-left:8px;
+                      background: #e6e600;
+                      box-shadow: 6px 6px 6px grey;
+                      border-radius:2px;">
+                  helion</div><br>
+      <div class="production-box production-box-size3" style="margin-left:5px;margin-top:-50px;">
+        <div class="production heat"></div><div class="production heat"></div><div class="production heat"></div>
+      </div>
+      3<div class="resource heat"></div>
+        <div class="resource money">48</div>
+
+      <div class="description" style="text-align:center;">
+        (You start with 3 heat production, 3 heat and 48 MC.)
+      </div>
+    </div>
+`],
+[CardName._ECOLINE_,`
+    <div class="tag tag1 tag-plant"></div>
+    <div class="corporationLabel">CORPORATION</div>
+    <div class="contentCorporation">
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel "style="margin-bottom:3px;"">EFFECT</div>
+        7
+        <div class="resource plant" style="margin-bottom: 0px;"></div> 
+        <span class="red-arrow"></span>
+        <div class="greenery-tile tile"style="margin-bottom:0px;padding: 2px;width: 25px;margin-top: 0px;"></div><br>
+        <div class="resource-tag tag-plant "style="margin-bottom:0px;"></div>  :
+        <div class="resource money">2</div>
+        <div class="description" style="text-align:center;margin-top:0px;">
+          (Effect: You may pay 7 plants to place greenery. When play a plant tag card, gain 2 MC.)
+        </div>
+      </div>
+      <span style="font-size:50px;
+                      font-weight:normal;
+                      color:rgb(0,180,0);
+                      letter-spacing:2px;
+                      margin-left:5px;
+                      text-shadow: -1px 0 #404040, 0 1px #404040, 1px 0 #404040, 0 -1px #404040, 5px 5px 5px grey;
+                      ">
+                  ecoline
+              </span><br>
+      <div class="production-box production-box-size2" style="margin-top:5px;margin-right:10px;">
+        <div class="production plant"></div><div class="production plant"></div>
+      </div>
+       <div class="resource money">36</div> 3<div class="resource plant"></div>
+      <div class="description" style="margin-top:-3px;text-align:center;">(You start with 2 plant production, 3 plants, and 36MC)</div>
+    </div>
+`],
+[CardName._TERACTOR_,`
+    <div class="tag tag1 tag-earth"></div>
+    <div class="corporationLabel">CORPORATION</div>
+    <div class="corporate-icon corporation-icon"></div>
+    <div class="contentCorporation">
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel">EFFECT</div>
+        <div class="resource-tag tag-earth"></div> :
+        <div class="resource money">-3</div>
+        <div class="description" style="text-align:center;margin-top:0px;">
+          (Effect: When playing an Earth card, you pay 3 MC less for it.)
+        </div>
+      </div>
+      <span style="font-size:34px;
+                      color: orangered;
+                      font-family: 'Times New Roman';
+                      font-weight:normal;
+                      text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;">
+                  TERACTOR
+              </span><br>
+      <div class="description" style="text-align:center;">
+        <div class="resource money" style="margin-top:10px;margin-right:10px;">55</div>
+        <div class="resource card"><div class="card-icon tag-earth"></div></div> 
+        <br> (You start with 55 MC. As your first action, draw 1 earth tag card. )
+      </div>
+    </div>
+`],
+[CardName._APHRODITE_,`
+    <div class="tag tag1 tag-plant"></div>
+    <div class="tag tag2 tag-venus"></div>
+    <div class="corporationLabel">CORPORATION</div>
+    <div class="venus-icon corporation-icon"></div>
+    <div class="contentCorporation">
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel">EFFECT</div>
+        <div class="tile venus-tile">V</div> : 2  <div class="resource plant"></div>
+        <div class="description" style="text-align:center;margin-top:0px;">
+          (Effect: Whenever Venus is terraformed 1 step, you gain 2 plant.)
+        </div>
+      </div>
+      <div style="font-size:23px;
+                    color: orange;
+                    font-weight:bold;
+                    margin-top:10px;
+                    text-shadow:  6px 6px 6px  grey;
+                    text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;">
+                APHRODITE</div>
+                <br>          
+            <div class="resource money " style="margin-left:20px; ">40</div>
+            <div class="tile venus-tile">V</div>
+            <div class="tile venus-tile">V</div>
+            <div class="description " style="text-align:center; ">
+                (You start with 40 MC. As your first action, raise Venus Scale 2 steps.)
+            </div>
+        </div>
+`],
+[CardName._FACTORUM_,`
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-power"></div>
+    <div class="corporationLabel">CORPORATION</div>
+    <div class="promo-icon corporation-icon"></div>
+    <div class="contentCorporation">
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel" style="margin-bottom:5px">ACTION</div>
+        <div class="red-arrow"></div><div class="production-box">
+          <div class="production energy"></div>
+        </div> * OR
+        <div class="resource money">3</div><div class="red-arrow"></div><div class="resource card">
+          <div class="card-icon card-icon-building" style="margin-top:-17px;">&#x2617;</div>
+        </div>
+        <div class="description" style="text-align:center;margin-top:0px;">
+          (Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.)
+        </div>
+      </div>
+      <div class="factorum">
+        FACTORUM
+      </div>
+      <div class="resource money" style="margin-left:35px;margin-right:20px;margin-top:20px;">45</div>
+      <div class="production-box">
+        <div class="production steel"></div>
+      </div>
+      <div class="description" style="text-align:center;">
+        (You start with 45 MC. Increase your steel production 1 step.)
+      </div>
+    </div>
+    `],
+[CardName._MINING_GUILD_,`
+  <div class="tag tag1 tag-building"></div>
+  <div class="tag tag2 tag-building"></div>
+  <div class="corporationLabel">CORPORATION</div>
+  <div class="contentCorporation">
+    <div class="corporationEffectBox">
+      <div class="corporationEffectBoxLabel"style="margin-bottom:3px;">EFFECT</div>
+      <div class="resource steel" style="margin-bottom: 0px;"></div> /
+      <div class="resource titanium" style="margin-bottom: 0px;"></div> :
+      <div class="production-box" style="margin-bottom:0px;padding: 1px;width: 34px;" >
+        <div class="production steel"style="margin-bottom:0px;"></div></div><br>
+        4<div class="resource steel" style = "margin-bottom:0px"></div>
+        <div class="red-arrow"></div>
+        <div class="triangle triangle-white"margin-bottom:0px;></div> /
+        <div class="tile city-tile " style="margin-bottom:0px;margin-left:5px;padding:1px;width: 30px;"></div>
+        (<span class="steel " style="margin:0px;padding:2px;padding-top:3px;border-radius:5px;"></span>)
+      <div class="description" style="text-align:center;line-height: 10px;font-size: 10px;">
+        (Effect: Each time you get steel/titanium as placement bonus, increase 1 steel prod.You can use 4 steel to trade.You can use steel to pay for city standard project.)
+      </div>
+    </div>
+    <span class=" mining guild" style="font-size:24px;
+            margin-left:20px;
+                    color:#c9380e;
+                    text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333, 0 -1px #333333, 2px 2px 2px  black;
+                    display:inline-block;
+                    -webkit-transform:scale(1.5,1); /* Safari and Chrome */
+                    -moz-transform:scale(1.5,1); /* Firefox */
+                    -ms-transform:scale(1.5,1); /* IE 9 */
+                    -o-transform:scale(1.5,1); /* Opera */
+                    transform:scale(1.5,1); /* W3C */
+                    ">
+                MINING<br>GUILD
+            </span><br>
+    <div class="resource money" style="margin-left:35px;">30</div>&nbsp;&nbsp;
+    5<div class="production steel"></div>
+    <div class="production-box" style="margin-top:5px;margin-left:20px;">
+      <div class="production steel"></div>
+    </div>
+    <div class="description" style="margin-top:-5px;text-align:center;">
+      (You start with 30 MC, 5 steel, and 1 steel production)
+    </div>
+  </div>
+`],
+[CardName._RECYCLON_,`
+      <div class="tag tag1 tag-building"></div>
+      <div class="tag tag2 tag-microbe"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      ##RESOURCES##
+      <div class="promo-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel" style="margin-bottom:10px">EFFECT</div>
+          <div class="resource-tag tag-building"></div> :<div class="resource microbe"></div> OR
+          2<div class="resource microbe"></div>:<div class="production-box" style="margin-left:5px;"><div class="production plant"></div></div><br>
+          <div class="description" style="margin-top:-3px;text-align:center;">(Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.)
+        </div>
+        </div>
+        <div  style="font-size:20px;margin-top:5px;margin-bottom:5px; border-radius:25px;padding:10px;font-weight:bold;
+        background:red;color:white; box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3), 3px 3px 3px #444; font-family: Prototype;
+        font-weight: normal;text-shadow: 0 0 1px black;"> RECYCLON</div>
+                </div><br>
+                <div class="resource money" style="margin-left:25px;">38</div>
+                <div class="resource microbe"></div><div class="resource microbe"></div>*
+                <div class="production-box"><div class="production steel"></div></div>
+        <div class="description" style="margin-top:0px;text-align:center;">(You start with 38 MC and 1 steel production. As your first action, add 2 mocrobed to this card)</div>
+`],
+[CardName._ROBINSON_INDUSTRIES_,`
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="prelude-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">ACTION</div>
+          <div class="resource money">2</div>
+          <div class="red-arrow"></div>
+          <div class="production-box">
+            <div class="production" style="background:white;">?</div>
+          </div>
+          <div class="description" style="text-align:center;margin-top:0px;">
+            (Action: Spend 2 MC to increase (one of) your LOWEST PRODUCTION 1 step.)
+          </div>
+        </div>
+        <div class="robinson" style="letter-spacing:4px;border-bottom:3px solid #ccc;margin-top:5px;">ROBINSON</div>
+        <div class="robinson" style="border-bottom:3px solid #ccc;">•—•—•—•—•—•—•&nbsp;</div>
+        <div class="robinson" style="letter-spacing:2px;">INDUSTRIES</div>
+        <div class="resource money" style="margin-left:59px;margin-top:10px;">47</div>
+        <div class="description" style="text-align:center;">
+          (You start with 47 MC.)
+        </div>
+`],
+[CardName._SPLICE_,`
+      <div class="tag tag1 tag-microbe"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="promo-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel" style="margin-bottom:2px">EFFECT</div>
+          <div class="resource-tag tag-microbe red-outline"></div> : <div class="resource money red-outline">2</div> * OR <div class="resource microbe red-outline"></div> *<br>
+          <div class="resource-tag tag-microbe red-outline" style="margin-top:-4px;"></div> : <div class="resource money" style="margin-right:91px;margin-left:5px;margin-top:-4px;">2</div> <br>
+          <div class="description" style="margin-top:-3px;text-align:center;">(Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.)
+        </div>
+        </div>
+        <div class="splice"><div style="margin-left:2px"> SPLI<span style="color:red">C</span>E</div>
+                    <div STYLE="height:3px;background:red;margin-top:-3px;"></div>
+                    <div STYLE="font-size:10px">TACTICAL GENOMICS</div>
+                </div>
+                <div class="resource money" style="margin-left:60px;margin-right:5px;">44</div>
+                <div class="resource card" style="margin-left:20px;margin-bottom: 0px;top: -10px;margin-top: -4px;"><div class="card-icon card-icon-microbe">&#x2042;</div></div>
+                <div class="resource card" style="margin-bottom: 0px;top: -10px;margin-top: -4px;"><div class="card-icon card-icon-microbe">&#x2042;</div></div>
+        <div class="description" style="margin-top:-2px;margin-left:-7px;margin-right:-7px;text-align:center;">(You start with 44 MC. As your first action, reveal cards until you have revealed 2 microbe tag. Take these cards into hand and discard the rest.)</div>
+      </div>
+`],
+[CardName._TERRALABS_RESEARCH_,`
+<div class="tag tag1 tag-earth"></div>
+<div class="tag tag2 tag-science"></div>
+  <div class="corporationLabel ">CORPORATION</div>
+  <div class="turmoil-icon corporation-icon"></div>
+  <div class="contentCorporation ">
+      <div class="corporationEffectBox ">
+          <div class="corporationEffectBoxLabel">EFFECT</div>
+            <div class="resource card"></div> : <div class="resource money">1</div>
+          <div class="description " style="text-align:center;margin-top:0px; ">
+              (Effect: Buying cards to hand costs 1MC.)
+          </div>
+      </div>
+      <div style="font-size:16px;margin-top:33px;margin-left:75px;margin-bottom:5px; font-family:Prototype;color:#222;transform:scale(2,1)">
+        TERRALABS
+        </div>
+        <div style="font-size:8px;letter-spacing:2px;font-family:Prototype;margin-left:100px;margin-top:-5px;transform:scale(2,1)">RESEARCH</div>
+      <div class="resource money " style="margin-left:25px;margin-right:20px;">20</div> - <div class="tile rating"></div>
+      <div class="description " style="text-align:center;">
+          (You start with 20 MC. Lower your TR 1 step.)
+      </div>
+  </div>
+`],
+
+[CardName._UNITED_NATIONS_MARS_INITIATIVE_,`
+    <div class="tag tag1 tag-earth"></div>
+    <div class="corporationLabel">CORPORATION</div>
+    <div class="contentCorporation">
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel" style="margin-bottom: 0px;">ACTION</div>
+        <div class="resource money" style="margin-bottom: 3px;top:3px">5</div> <span class="red-arrow"></span>
+        <div class="tile rating" style="margin-bottom: 3px;padding-top: 6px;padding-bottom: 3px;padding-left: 4px;width: 26px;"></div>*<br>
+        <div class="tile rating"style="margin-bottom: 3px;padding-top: 6px;padding-bottom: 3px;padding-left: 4px;width: 26px;";></div>: <div class="resource money">2</div>
+        <div class="description" style="text-align:center;margin-top:0px;">
+          (Action:If your TR was raised this generation, you may pay 5 MC to raise 1 step. When you raise TR, gain 2 MC.)
+        </div>
+      </div>
+      <div class="background-color-active" style="font-size:16px;
+                      width:100px;
+                      color: white;
+                      margin-left:19px;
+                      margin-bottom:8px;
+                      padding:5px;
+                      padding-top:5px;
+                      padding-bottom:5px;
+                      text-align:center;
+                      font-weight:normal;
+                      box-shadow:3px 3px 6px grey;
+                      ">
+                  UNITED NATIONS MARS INITIATIVE
+              </div>
+      <div class="description" style="text-align:center;margin-left:50px;">
+        <div class="resource money">40</div> &nbsp;&nbsp;&nbsp;(You start with 40 MC.)
+      </div>
+    </div>
+`],
+[CardName._VALLEY_TRUST_,`
+      <div class="tag tag1 tag-earth"></div>
+      <div class="tag tag2 tag-science"></div>
+        <div class="corporationLabel ">CORPORATION</div>
+        <div class="prelude-icon corporation-icon"></div>
+        <div class="contentCorporation ">
+            <div class="corporationEffectBox ">
+                <div class="corporationEffectBoxLabel ">EFFECT</div>
+                <div class="resource-tag science"></div> : <div class="resource money">-2</div>
+                <div class="description " style="text-align:center;margin-top:0px; ">
+                    (Effect: When you play an Science tag, you pay 2MC less for it.)
+                </div>
+            </div>
+            <div style="color:rgb(2,125,195);background:linear-gradient(to right,rgb(2,125,195) 10%,white,white,white, white,white,white, white);box-shadow:3px 3px 10px 1px rgb(58,58,58);width:135px;line-height:24px;border-radius:10px 0px 0px 10px">
+              <div style="display:inline-block;margin-left:25px;margin-top: 3px;margin-bottom:15px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">VALLEY TRUST</div>
+            </div>
+            <div class="description" style="text-align:center;">
+            <div class="resource money" style="margin-left:12px;margin-top:10px;">37</div> <div class="resource card-corporation" style="margin-left:50px"><span style="background:linear-gradient(to right, rgb(235,118,171), #e64d91);padding-left:4px;padding-right:4px;border-radius:2px;">PREL</span></div>
+            <div class="description" style="margin-top:-2px;">
+              (You start with 37 MC. As your first action, draw 4 Prelude cards, and play one of them. Discard the other three.)
+            </div>
+        </div>
+`],
+[CardName._VIRON_,`
+      <div class="tag tag1 tag-wild"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="venus-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">ACTION</div>
+          <div class="red-arrow" style="font-size:30px;"></div>
+          <div class="description" style="text-align:center;margin-top:0px;">
+            (Action: Use a blue card action that has already been used this generation.)
+          </div>
+        </div>
+        <div  style="font-size:50px; font-family: Prototype;margin-left: 15px;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 6px 3px 5px  grey;
+                        ">
+                    VIRON
+                </div>
+        <div class="resource money" style="margin-left:65px;">48</div>
+        <div class="description" style="text-align:center;">
+          (You start with 48 MC.)
+        </div>
+      </div>
+`],
+
 ]);
